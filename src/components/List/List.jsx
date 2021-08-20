@@ -11,10 +11,16 @@ import PlaceDetails from "../PlaceDetails/PlaceDetails";
 import useStyles from "./style";
 import { Grid } from "@material-ui/core";
 
-function List({ places, childClicked, isLoading }) {
+function List({
+  places,
+  childClicked,
+  isLoading,
+  type,
+  setType,
+  rating,
+  setRating,
+}) {
   const classes = useStyles();
-  const [type, setType] = useState("restutautent");
-  const [rating, setRating] = useState(0);
   const [elRefs, setElRefs] = useState([]);
 
   useEffect(() => {
@@ -44,7 +50,7 @@ function List({ places, childClicked, isLoading }) {
               value={type}
               onChange={(e) => setType(e.target.value)}
             >
-              <option value="restutautent">Restutautent</option>
+              <option value="restaurants">Restutautent</option>
               <option value="hotels">Hotels</option>
               <option value="attractions">Attractions</option>
             </NativeSelect>
