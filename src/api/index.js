@@ -22,8 +22,7 @@ export const getPlacesData = async (type = "restaurants", sw, ne) => {
           // lang: "en_US",
         },
         headers: {
-          "x-rapidapi-key":
-            "ae51490b8emsh67da63f5f8fc3e4p1ed85fjsn23aabce93548",
+          "x-rapidapi-key": process.env.REACT_APP_RAPID_API_KEY,
           "x-rapidapi-host": "travel-advisor.p.rapidapi.com",
         },
       }

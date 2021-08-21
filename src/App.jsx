@@ -10,7 +10,7 @@ function App() {
   const [places, setPlaces] = useState([]);
   const [filterdPlaces, setFilterdPlaces] = useState([]);
   const [coordinates, setCoordinates] = useState({});
-  const [bounds, setBounds] = useState(null);
+  const [bounds, setBounds] = useState({});
   const [childClicked, setChiledClicked] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [type, setType] = useState("restaurants");
@@ -30,18 +30,19 @@ function App() {
   }, [rating]);
 
   useEffect(() => {
-    setIsLoading(true);
-    if (bounds)
+    if (bounds.sw && bounds.ne) {
       getPlacesData(type, bounds.sw, bounds.ne).then((data) => {
-        setPlaces(data);
+        setPlaces(data?.filter((place) => place.name && place.num_reviews > 0));
         setIsLoading(false);
       });
+    }
+    setIsLoading(true);
   }, [type, bounds]);
 
   return (
     <div className="App">
       <CssBaseline />
-      <Header />
+      <Header setCoordinates={setCoordinates} />
       <Grid container spaceing={3} style={{ width: "100%" }}>
         <Grid item xs={12} md={4}>
           <List
